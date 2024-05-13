@@ -1,5 +1,4 @@
 {
-  "homepage": "https://lskervin.github.io/GameSphere/",
   "name": "GameSphere",
   "private": true,
   "version": "0.0.0",
@@ -9,8 +8,6 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist",
-    "predeploy": "npm run build"
   },
   "dependencies": {
     "css-loader": "^6.10.0",
