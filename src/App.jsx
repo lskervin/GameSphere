@@ -20,9 +20,9 @@ function App() {
   // const nPages = Math.ceil(data.length / recordsPerPage)
   // const setGamesList =setGames
   useEffect(()=>{
-    fetch('http://localhost:3000/games')
+    fetch('https://lskervin.github.io/phase-2-project/db.json')
     .then((res)=>res.json())
-    .then((data)=>setGames(data))
+    .then((data)=>setGames(data.games))
   },[<GenreFilter/>])
   
 
