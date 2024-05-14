@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {createHashRouter, RouterProvider} from "react-router-dom";
 import About from "./components/About"
 import Contact from "./components/Contact"
 import GameList from './components/GameList.jsx';
@@ -12,7 +12,7 @@ import GameCard from './components/GameCard.jsx';
 import GenreFilter from './components/GenreFilter.jsx';
 
 const Main = () => {
-  const routes = createBrowserRouter([
+  const routes = createHashRouter([
     {
       path: "/",
       element: <App />,
