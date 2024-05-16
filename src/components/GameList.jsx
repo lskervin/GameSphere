@@ -11,9 +11,12 @@ function GameList() {
     const [genre, setGenre] = useState('All Games');
     const [search, setSearch] = useState('');
     const [selectedGame, setSelectedGame] = useState([]); // Initialize as null
+    const [currentPage, setCurrentPage] = useState(1);
+    const [gamesPerPage] = useState(8); // Number of leases to display per page
  
 
     const { games, setGames } = useOutletContext();
+    
 
   
 
@@ -38,6 +41,14 @@ function GameList() {
           game.title.toLowerCase().includes(search.toLowerCase())// Filter by search
         );
       });
+    
+    // Get current Games
+    const indexOfLastGame = currentPage * gamesPerPage;
+    const indexOfFirstGame = indexOfLastGame - gamesPerPage;
+    const currentGames = filteredGames.slice(indexOfFirstGame, indexOfLastGame);
+
+    // Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
         <div className='game-list-container'>
@@ -48,13 +59,15 @@ function GameList() {
             <Search setSearch={setSearch} search={search} />
             <header className="game-list-header">{ search.length > 0? 'Search Results:' : genre }:</header>
             <div className="game-list">
-                {filteredGames.map((game) => (
+                {currentGames.map((game) => (
                     <GameCard key={game.id} isFave={game.isFavorite} game={game} value={game} onClick={handleGameCardClick}/>
                 ))}
             </div>
-            {/* {selectedGames && filteredGames.map((game) => {return (
-                selectedGames === game.id (<GamePlay thumbnail={game.thumbnail} />))} */}
-             {/* Ensure selectedGames is not null before rendering */}
+            <div className="pagination">
+                {Array.from({ length: Math.ceil(filteredGames.length / gamesPerPage) }).map((_, index) => (
+                    <button key={index} onClick={() => paginate(index + 1)}>{index + 1}</button>
+                ))}
+            </div>
         </div>
     );
 }
